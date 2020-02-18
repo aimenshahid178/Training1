@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TO DO</title>
-    <script type="text/javascript" src="index.js"></script>
+    
     <style type="text/css">
         div{
             background-color: rgb(116, 157, 233);
@@ -16,6 +16,8 @@
             font-size: 20px;
             height: 30px;
             width: 600px;
+            display: block;
+            cursor: move;
         }
         
     </style>
@@ -35,7 +37,11 @@
         <center><input type="text" onfocus="this.value=''" placeholder="New item ..." id="task" name="task" size="60" maxlength="28" style="height: 30px; font-size: 14pt; display: inline-block;">
             <button type="button" onclick="add_item(document.getElementById('task').value)"><img src="add.png" height="30" width="30"></button></center>
     </form>
+    <section ondragover="allowDrop(event)" ondrop="drop(event)">
+
+    </section>
     <p id="demo"></p>
+    <script type="text/javascript" src="index.js"></script>
 
 </body>
 </html>
