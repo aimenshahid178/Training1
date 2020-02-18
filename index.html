@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO DO</title>
+    <script type="text/javascript" src="index.js"></script>
+    <style type="text/css">
+        div{
+            background-color: rgb(116, 157, 233);
+            border-color: black;
+            border-width: 2px;
+            margin: auto;
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 20px;
+            height: 30px;
+            width: 600px;
+        }
+        
+    </style>
+</head>
+<body style="background-color: rgb(26, 126, 226);" onload="display_items();">
+    <h1 style="color: floralwhite;">
+        <center>WORK TO-DOS</center>
+    </h1>
+    <h4 style="color: yellow;">
+        <center>Enter text into the input field to add items to your list (max. 28 characters).</center>
+    </h4>
+    <h4 style="color: limegreen;">
+        <center>Click the item to delete it.</center>
+    </h4>
+    <h4 style="color: midnightblue;"><center>Right click the item to edit it.</center></h4>
+    <form>
+        <center><input type="text" onfocus="this.value=''" placeholder="New item ..." id="task" name="task" size="60" maxlength="28" style="height: 30px; font-size: 14pt; display: inline-block;">
+            <button type="button" onclick="add_item(document.getElementById('task').value)"><img src="add.png" height="30" width="30"></button></center>
+    </form>
+    <p id="demo"></p>
+
+</body>
+</html>
