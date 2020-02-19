@@ -15,9 +15,14 @@
             padding: 10px;
             font-size: 20px;
             height: 30px;
-            width: 600px;
+            width: 300px;
             display: block;
             cursor: move;
+        }
+        .wrapper{
+            display: grid;
+            grid-template-columns: lfr lfr;
+            grid-gap: 10px;
         }
         
     </style>
@@ -37,9 +42,13 @@
         <center><input type="text" onfocus="this.value=''" placeholder="New item ..." id="task" name="task" size="60" maxlength="28" style="height: 30px; font-size: 14pt; display: inline-block;">
             <button type="button" onclick="add_item(document.getElementById('task').value)"><img src="add.png" height="30" width="30"></button></center>
     </form>
-    <section ondragover="allowDrop(event)" ondrop="drop(event)" class="box" style="height: 5000px;">
+    <div class="wrapper">
+        <section ondragover="allowDrop(event)" ondrop="drop(event)" class="box" style="height: 5000px;">
+        </section>
+        <section ondragover="allowDrop(event)" ondrop="drop(event)" class="box" style="height: 5000px;">
 
-    </section>
+        </section>
+    </div>
     <p id="demo"></p>
     <script type="text/javascript" src="index.js"></script>
 

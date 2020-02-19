@@ -1,4 +1,4 @@
-let todo_list = [1,2,3,4];
+let todo_list = ['1','2','3','4'];
 let id;
 //var container = document.querySelector("section");
 var dropTarget = document.querySelector(".box");
@@ -6,16 +6,31 @@ var draggables = document.querySelectorAll(".task");
 
 
 function add_item(item){
+  console.log(item);
+  if (item === ""){
+    alert("You cannot add an empty item.");
+  }
+  else{
+    for(let i = 0; i < todo_list.length; i++){
+      if(item === todo_list[i]){
+        alert("This item already exists in the Todo List, please add a different item.");
+        return;
+      }
+    }
     todo_list.push(item);
     console.log(todo_list);
     display_new_item(item);
+  }
 
 };
 
 function edit_item(id){
     var change = prompt("Changes in To Do Item: ");
-    if(change != null){
+    if(change != ""){
         document.getElementById(id).innerHTML = change;
+    }
+    else{
+      alert("You cannot add an empty item")
     }
 }; /*
 
