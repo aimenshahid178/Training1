@@ -21,8 +21,7 @@
         }
         .wrapper{
             display: grid;
-            grid-template-columns: lfr lfr;
-            grid-gap: 10px;
+            grid-gap: 50px;
         }
         
     </style>
@@ -42,10 +41,12 @@
         <center><input type="text" onfocus="this.value=''" placeholder="New item ..." id="task" name="task" size="60" maxlength="28" style="height: 30px; font-size: 14pt; display: inline-block;">
             <button type="button" onclick="add_item(document.getElementById('task').value)"><img src="add.png" height="30" width="30"></button></center>
     </form>
-    <div class="wrapper">
-        <section ondragover="allowDrop(event)" ondrop="drop(event)" class="box" style="height: 5000px;">
+    <div class="wrapper" style="background-color: transparent; grid-template-columns: auto auto; width: 800px;">
+        <section ondragover="allowDrop(event)" ondrop="drop(event)" class="box" style="height: 500px; background-color: transparent;">
+            <div style="background-color: darkgray;"><center>PENDING</center></div>
         </section>
-        <section ondragover="allowDrop(event)" ondrop="drop(event)" class="box" style="height: 5000px;">
+        <section ondragover="allowDrop(event)" ondrop="drop(event)" class="box" style="height: 500px; background-color: transparent;">
+            <div style="background-color: darkgray;"><center>COMPLETED</center></div>
 
         </section>
     </div>

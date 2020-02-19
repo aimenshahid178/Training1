@@ -1,6 +1,4 @@
 let todo_list = ['1','2','3','4'];
-let id;
-//var container = document.querySelector("section");
 var dropTarget = document.querySelector(".box");
 var draggables = document.querySelectorAll(".task");
 
@@ -21,7 +19,6 @@ function add_item(item){
     console.log(todo_list);
     display_new_item(item);
   }
-
 };
 
 function edit_item(id){
@@ -30,84 +27,59 @@ function edit_item(id){
         document.getElementById(id).innerHTML = change;
     }
     else{
-      alert("You cannot add an empty item")
+      alert("You cannot add an empty item.");
     }
-}; /*
-
-function allowDrop(ev){
-   ev.preventDefault();
 };
 
-function dragStart(ev){
-    id = ev.target.id;
+function create_new_item(item){
+  let newDiv = document.createElement("div");
+  let newContent = document.createTextNode(item);
+  newDiv.setAttribute("id", todo_list.indexOf(item));
+  newDiv.setAttribute("draggable",true);
+  newDiv.setAttribute("class", "task");
+  newDiv.onclick = function(){ newDiv.remove(); };
+  newDiv.appendChild(newContent);
+  dropTarget.appendChild(newDiv);
+  document.getElementById(todo_list.indexOf(item)).addEventListener("contextmenu",function(){edit_item(todo_list.indexOf(item))});
+  startDrag();
+  dragOver();
+  drop();
 };
 
-function drop(ev){
-    ev.target.append(document.getElementById(id));
-}; */
+function startDrag(){
+  dropTarget.addEventListener("dragstart", function(ev){
+    ev.dataTransfer.setData("srcId", ev.target.id);
+  });
+};
+
+function dragOver(){
+  dropTarget.addEventListener('dragover', function(ev) {
+    ev.preventDefault();
+  });
+};
+
+function drop(){
+  dropTarget.addEventListener('drop', function(ev) {
+    ev.preventDefault();
+    let target = ev.target;
+    let droppable  = target.classList.contains('box');
+    let srcId = ev.dataTransfer.getData("srcId");
+
+    if (droppable) {
+      ev.target.appendChild(document.getElementById(srcId));
+    }
+  });
+};
 
 function display_items(){
-    
     for(let i = 0; i < todo_list.length; i++){
-        let newDiv = document.createElement("div");
-        let newContent = document.createTextNode(todo_list[i]);
-        newDiv.setAttribute("id", todo_list[i]);
-        //newDiv.setAttribute("ondragstart", dragStart(event));
-        newDiv.setAttribute("class", "task");
-        newDiv.setAttribute("draggable",true);
-        newDiv.onclick = function(){ newDiv.remove(); };
-        newDiv.appendChild(newContent);
-        dropTarget.appendChild(newDiv);
-        //var currentDiv = document.getElementById("demo"); 
-        //document.body.insertBefore(newDiv, currentDiv);
-        document.getElementById(todo_list[i]).addEventListener("contextmenu",function(){edit_item(todo_list[i])});
-        dropTarget.addEventListener("dragstart", function(ev){
-            ev.dataTransfer.setData("srcId", ev.target.id);
-        });
-        dropTarget.addEventListener('dragover', function(ev) {
-            ev.preventDefault();
-          });
-          dropTarget.addEventListener('drop', function(ev) {
-            ev.preventDefault();
-            let target = ev.target;
-            let droppable  = target.classList.contains('box');
-            let srcId = ev.dataTransfer.getData("srcId");
-            
-            if (droppable) {
-              ev.target.appendChild(document.getElementById(srcId));
-            }
-          });
-        
+        let item = todo_list[i];
+        create_new_item(item);    
     }
 };
 
 function display_new_item(item){
-    let newDiv = document.createElement("div");
-    let newContent = document.createTextNode(item);
-    newDiv.setAttribute("id", todo_list.indexOf(item));
-    newDiv.setAttribute("draggable",true);
-    newDiv.setAttribute("class", "task");
-    newDiv.onclick = function(){ newDiv.remove(); };
-    newDiv.appendChild(newContent);
-    dropTarget.appendChild(newDiv);
-    document.getElementById(todo_list.indexOf(item)).addEventListener("contextmenu",function(){edit_item(todo_list.indexOf(item))});
-    dropTarget.addEventListener("dragstart", function(ev){
-        ev.dataTransfer.setData("srcId", ev.target.id);
-    });
-    dropTarget.addEventListener('dragover', function(ev) {
-        ev.preventDefault();
-      });
-      dropTarget.addEventListener('drop', function(ev) {
-        ev.preventDefault();
-        let target = ev.target;
-        let droppable  = target.classList.contains('box');
-        let srcId = ev.dataTransfer.getData("srcId");
-        
-        if (droppable) {
-          ev.target.appendChild(document.getElementById(srcId));
-        }
-      });
-    
-}
+  create_new_item(item);    
+};
 
 
