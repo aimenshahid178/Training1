@@ -1,6 +1,9 @@
+// https://jsbin.com/liqavu/edit?html,js,output
+
 let todo_list = ['1','2','3','4'];
-var dropTarget = document.querySelector(".box");
+var dropTarget = document.querySelector(".wrapper");
 var draggables = document.querySelectorAll(".task");
+var container = document.querySelector(".box");
 
 
 function add_item(item){
@@ -17,7 +20,7 @@ function add_item(item){
     }
     todo_list.push(item);
     console.log(todo_list);
-    display_new_item(item);
+    create_new_item(item);
   }
 };
 
@@ -39,7 +42,7 @@ function create_new_item(item){
   newDiv.setAttribute("class", "task");
   newDiv.onclick = function(){ newDiv.remove(); };
   newDiv.appendChild(newContent);
-  dropTarget.appendChild(newDiv);
+  container.appendChild(newDiv);
   document.getElementById(todo_list.indexOf(item)).addEventListener("contextmenu",function(){edit_item(todo_list.indexOf(item))});
   startDrag();
   dragOver();
@@ -58,7 +61,7 @@ function dragOver(){
   });
 };
 
-function drop(){
+function drop(ev){
   dropTarget.addEventListener('drop', function(ev) {
     ev.preventDefault();
     let target = ev.target;
@@ -67,6 +70,9 @@ function drop(){
 
     if (droppable) {
       ev.target.appendChild(document.getElementById(srcId));
+      if(target.id === "complete"){
+        document.getElementById(srcId).setAttribute("style", "background-color: green");
+      }
     }
   });
 };
@@ -76,10 +82,6 @@ function display_items(){
         let item = todo_list[i];
         create_new_item(item);    
     }
-};
-
-function display_new_item(item){
-  create_new_item(item);    
 };
 
 

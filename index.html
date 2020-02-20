@@ -42,15 +42,14 @@
             <button type="button" onclick="add_item(document.getElementById('task').value)"><img src="add.png" height="30" width="30"></button></center>
     </form>
     <div class="wrapper" style="background-color: transparent; grid-template-columns: auto auto; width: 800px;">
-        <section ondragover="allowDrop(event)" ondrop="drop(event)" class="box" style="height: 500px; background-color: transparent;">
+        <section id="pending" ondragover="dragOver()" ondrop="drop(event)" class="box" style="height: 500px; background-color: transparent;">
             <div style="background-color: darkgray;"><center>PENDING</center></div>
         </section>
-        <section ondragover="allowDrop(event)" ondrop="drop(event)" class="box" style="height: 500px; background-color: transparent;">
+        <section id="complete" ondragover="dragOver(event)" ondrop="drop(event)" class="box" style="height: 500px; background-color: transparent;">
             <div style="background-color: darkgray;"><center>COMPLETED</center></div>
 
         </section>
     </div>
-    <p id="demo"></p>
     <script type="text/javascript" src="index.js"></script>
 
 </body>
