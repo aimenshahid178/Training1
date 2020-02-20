@@ -51,7 +51,6 @@ function multiple_delete(){
   for(let i = 0; i<checked.length; i++){
     document.getElementById(checked[i]).remove();
     todo_list = todo_list.filter(x => {return x != checked[i]});
-    console.log("Nah");
   }
   checked = [];
 }
@@ -66,7 +65,6 @@ function create_new_item(item){
   select.addEventListener('change', function(){
     if(this.checked){
       checked.push(div_id);
-      console.log("Yup");
     }
   })
   delButton.innerHTML = "DELETE";
