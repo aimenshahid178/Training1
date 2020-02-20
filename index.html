@@ -23,6 +23,10 @@
             display: grid;
             grid-gap: 50px;
         }
+        .box{
+            height: 500px;
+            background-color: transparent;
+        }
         
     </style>
 </head>
@@ -37,15 +41,19 @@
         <center>Click the item to delete it.</center>
     </h4>
     <h4 style="color: midnightblue;"><center>Right click the item to edit it.</center></h4>
+    <h4 style="color: floralwhite;"><center>Drag item to the Completed section to mark it done.</center></h4>
+    <h4 style="color: yellow;">
+        <center>Pass mouse over item to select and over again to unselect.</center>
+    </h4>
     <form>
         <center><input type="text" onfocus="this.value=''" placeholder="New item ..." id="task" name="task" size="60" maxlength="28" style="height: 30px; font-size: 14pt; display: inline-block;">
             <button type="button" onclick="add_item(document.getElementById('task').value)"><img src="add.png" height="30" width="30"></button></center>
     </form>
     <div class="wrapper" style="background-color: transparent; grid-template-columns: auto auto; width: 800px;">
-        <section id="pending" ondragover="dragOver()" ondrop="drop(event)" class="box" style="height: 500px; background-color: transparent;">
+        <section id="pending" class="box" ondragover="dragOver()" ondrop="drop(event)">
             <div style="background-color: darkgray;"><center>PENDING</center></div>
         </section>
-        <section id="complete" ondragover="dragOver(event)" ondrop="drop(event)" class="box" style="height: 500px; background-color: transparent;">
+        <section id="complete" class="box" ondragover="dragOver(event)" ondrop="drop(event)">
             <div style="background-color: darkgray;"><center>COMPLETED</center></div>
 
         </section>

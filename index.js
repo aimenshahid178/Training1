@@ -1,13 +1,12 @@
 // https://jsbin.com/liqavu/edit?html,js,output
 
-let todo_list = ['1','2','3','4'];
+let todo_list = [];
 var dropTarget = document.querySelector(".wrapper");
 var draggables = document.querySelectorAll(".task");
 var container = document.querySelector(".box");
 
 
 function add_item(item){
-  console.log(item);
   if (item === ""){
     alert("You cannot add an empty item.");
   }
@@ -19,7 +18,6 @@ function add_item(item){
       }
     }
     todo_list.push(item);
-    console.log(todo_list);
     create_new_item(item);
   }
 };
@@ -34,16 +32,35 @@ function edit_item(id){
     }
 };
 
+function delete_item(id){
+  document.getElementById(id).remove();
+  for(let i = 0; i<todo_list.length; i++){
+    if(document.getElementById(i) != null){
+      if(document.getElementById(i).getAttribute("style") === "background-color: yellow"){
+        document.getElementById(i).remove();
+      }
+    }
+  }
+};
+
 function create_new_item(item){
   let newDiv = document.createElement("div");
   let newContent = document.createTextNode(item);
-  newDiv.setAttribute("id", todo_list.indexOf(item));
+  let div_id = todo_list.indexOf(item);
+  newDiv.setAttribute("id", div_id);
   newDiv.setAttribute("draggable",true);
   newDiv.setAttribute("class", "task");
-  newDiv.onclick = function(){ newDiv.remove(); };
   newDiv.appendChild(newContent);
   container.appendChild(newDiv);
-  document.getElementById(todo_list.indexOf(item)).addEventListener("contextmenu",function(){edit_item(todo_list.indexOf(item))});
+  newDiv.addEventListener("click",function(){delete_item(div_id)});
+  newDiv.addEventListener("contextmenu",function(){edit_item(div_id)});
+  newDiv.addEventListener("mouseover",function(){
+  if(newDiv.getAttribute("style") === "background-color: yellow"){
+    newDiv.setAttribute("style", "background-color: rgb(116, 157, 233)");
+  }
+  else{
+    newDiv.setAttribute("style", "background-color: yellow")
+  }});
   startDrag();
   dragOver();
   drop();
