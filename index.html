@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TO DO</title>
+    <script src="http://SortableJS.github.io/Sortable/Sortable.js"></script>
     
     <style type="text/css">
         div{
@@ -38,9 +39,9 @@
         <center>Enter text into the input field to add items to your list (max. 28 characters).</center>
     </h4>
     <h4 style="color: limegreen;">
-        <center>Click the item to delete it.</center>
+        <center>Press delete button to delete.</center>
     </h4>
-    <h4 style="color: midnightblue;"><center>Right click the item to edit it.</center></h4>
+    <h4 style="color: midnightblue;"><center>Press edit button to edit.</center></h4>
     <h4 style="color: floralwhite;"><center>Drag item to the Completed section to mark it done.</center></h4>
     <h4 style="color: yellow;">
         <center>Pass mouse over item to select and over again to unselect.</center>
@@ -49,6 +50,7 @@
         <center><input type="text" onfocus="this.value=''" placeholder="New item ..." id="task" name="task" size="60" maxlength="28" style="height: 30px; font-size: 14pt; display: inline-block;">
             <button type="button" onclick="add_item(document.getElementById('task').value)"><img src="add.png" height="30" width="30"></button></center>
     </form>
+    <center><button id="delAll" onclick="multiple_delete()" style="margin-top: 20px; font-size: 20px;">Delete Multiple Items</button></center>
     <div class="wrapper" style="background-color: transparent; grid-template-columns: auto auto; width: 800px;">
         <section id="pending" class="box" ondragover="dragOver()" ondrop="drop(event)">
             <div style="background-color: darkgray;"><center>PENDING</center></div>

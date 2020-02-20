@@ -1,9 +1,18 @@
 // https://jsbin.com/liqavu/edit?html,js,output
 
-let todo_list = [];
+let todo_list = ['1','2','3','4'];
+let checked = [];
 var dropTarget = document.querySelector(".wrapper");
 var draggables = document.querySelectorAll(".task");
 var container = document.querySelector(".box");
+
+Sortable.create(container);
+task.addEventListener("keydown", function(event){
+  if(event.keyCode === 13){
+    event.preventDefault();
+    add_item(document.getElementById('task').value);
+  }
+})
 
 
 function add_item(item){
@@ -22,48 +31,71 @@ function add_item(item){
   }
 };
 
-function edit_item(id){
+function edit_item(item){
     var change = prompt("Changes in To Do Item: ");
     if(change != ""){
-        document.getElementById(id).innerHTML = change;
+        document.getElementById(item).childNodes[1].nodeValue = change;
+        
     }
     else{
       alert("You cannot add an empty item.");
     }
 };
 
-function delete_item(id){
-  document.getElementById(id).remove();
-  for(let i = 0; i<todo_list.length; i++){
-    if(document.getElementById(i) != null){
-      if(document.getElementById(i).getAttribute("style") === "background-color: yellow"){
-        document.getElementById(i).remove();
-      }
-    }
-  }
+function delete_item(item){
+  document.getElementById(item).remove();
+  todo_list = todo_list.filter(i => {return i != item});  
 };
 
+function multiple_delete(){
+  for(let i = 0; i<checked.length; i++){
+    document.getElementById(checked[i]).remove();
+    todo_list = todo_list.filter(x => {return x != checked[i]});
+    console.log("Nah");
+  }
+  checked = [];
+}
+
 function create_new_item(item){
+  let div_id = item;
   let newDiv = document.createElement("div");
+  let delButton = document.createElement("button");
+  let editButton = document.createElement("button");
+  let select = document.createElement("input");
+  select.type = "checkbox";
+  select.addEventListener('change', function(){
+    if(this.checked){
+      checked.push(div_id);
+      console.log("Yup");
+    }
+  })
+  delButton.innerHTML = "DELETE";
+  editButton.innerHTML = "EDIT";
+  editButton.onclick = function(){edit_item(div_id)};
+  delButton.onclick = function(){delete_item(div_id)};
+  editButton.setAttribute("style", "margin-left: 30%");
+  delButton.setAttribute("style", "margin-left: 5%");
   let newContent = document.createTextNode(item);
-  let div_id = todo_list.indexOf(item);
+  select.setAttribute("style", "margin-left: 5px");
+  select.setAttribute("style", "margin-right: 20px");
   newDiv.setAttribute("id", div_id);
   newDiv.setAttribute("draggable",true);
   newDiv.setAttribute("class", "task");
+  newDiv.appendChild(select);
   newDiv.appendChild(newContent);
+  newDiv.appendChild(editButton);
+  newDiv.appendChild(delButton);
   container.appendChild(newDiv);
-  newDiv.addEventListener("click",function(){delete_item(div_id)});
-  newDiv.addEventListener("contextmenu",function(){edit_item(div_id)});
-  newDiv.addEventListener("mouseover",function(){
-  if(newDiv.getAttribute("style") === "background-color: yellow"){
-    newDiv.setAttribute("style", "background-color: rgb(116, 157, 233)");
-  }
-  else{
-    newDiv.setAttribute("style", "background-color: yellow")
-  }});
   startDrag();
   dragOver();
   drop();
+};
+
+function display_items(){
+  for(let i = 0; i < todo_list.length; i++){
+      let item = todo_list[i];
+      create_new_item(item);    
+  }
 };
 
 function startDrag(){
@@ -94,11 +126,6 @@ function drop(ev){
   });
 };
 
-function display_items(){
-    for(let i = 0; i < todo_list.length; i++){
-        let item = todo_list[i];
-        create_new_item(item);    
-    }
-};
+
 
 
