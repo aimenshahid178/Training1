@@ -1,6 +1,6 @@
 // https://jsbin.com/liqavu/edit?html,js,output
 
-let todo_list = ['1','2','3','4'];
+let todo_list = [];
 let checked = [];
 var dropTarget = document.querySelector(".wrapper");
 var draggables = document.querySelectorAll(".task");
@@ -34,8 +34,13 @@ function add_item(item){
 function edit_item(item){
     var change = prompt("Changes in To Do Item: ");
     if(change != ""){
+      for(let i = 0; i<todo_list.length; i++){
+        if(change === todo_list[i]){
+          alert("This task already exists in the Todo List, please add a different item.");
+          return
+        }
+      }
         document.getElementById(item).childNodes[1].nodeValue = change;
-        
     }
     else{
       alert("You cannot add an empty item.");
